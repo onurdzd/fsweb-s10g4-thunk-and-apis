@@ -26,16 +26,20 @@ export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
       if(state.favs.filter(item=> item===action.payload).length<1){
-      return {
-        ...state,
-        favs:[...state.favs,action.payload]
-      }}else{return state};
+        const newState={
+          ...state,
+          favs:[...state.favs,action.payload]
+        }
+        writeFavsToLocalStorage(newState)
+      return newState }else{return state};
 
     case FAV_REMOVE:
-      return {
-        ...state,
-        favs:state.favs.filter(item=> item!==action.payload)
-      };
+        const newState={
+          ...state,
+          favs:state.favs.filter(item=> item!==action.payload)
+        }
+        writeFavsToLocalStorage(newState)
+      return newState;
 
     case FETCH_SUCCESS:
       return {
@@ -57,9 +61,13 @@ export function myReducer(state = initial, action) {
       };
 
     case GET_FAVS_FROM_LS:
-      return state;
+      return {
+        ...state,
+        favs:readFavsFromLocalStorage()
+      }
 
-    default:
+      default:
       return state;
   }
+  
 }

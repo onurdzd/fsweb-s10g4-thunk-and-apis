@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Item from "./components/Item";
 import FavItem from "./components/FavItem";
-import { addFav, fetchAnother } from "./actions";
+import { addFav, fetchAnother, getFavsFromLocalStorage } from "./actions";
 import { useDispatch ,useSelector} from "react-redux";
 
 export default function App() {
   const loading = useSelector((store)=> store.loading);
   const dispatch=useDispatch()
-
   const current=useSelector((store)=> store.current)
   const favs = useSelector((store)=>store.favs);
   function addToFavs() {
     dispatch(addFav(current))
   }
+
+  useEffect(()=>{
+    dispatch(getFavsFromLocalStorage())
+  },[])
 
   return (
     <div className="wrapper max-w-xl mx-auto px-4">
@@ -47,7 +50,8 @@ export default function App() {
               Başka bir tane
             </button>
             <button
-              onClick={addToFavs}
+              onClick={()=>{addToFavs()
+             }}
               className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
               disabled={!current.activity}
             >
