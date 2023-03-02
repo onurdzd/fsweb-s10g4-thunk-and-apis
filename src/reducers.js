@@ -9,9 +9,9 @@ import {
 
 const initial = {
   favs: [],
-  current: null,
+  current: "Rastgele Hobi Seçebilirsin",
   error: null,
-  loading: true,
+  loading: false,
 };
 
 function writeFavsToLocalStorage(state) {
@@ -25,19 +25,36 @@ function readFavsFromLocalStorage() {
 export function myReducer(state = initial, action) {
   switch (action.type) {
     case FAV_ADD:
-      return state;
+      if(state.favs.filter(item=> item===action.payload).length<1){
+      return {
+        ...state,
+        favs:[...state.favs,action.payload]
+      }}else{return state};
 
     case FAV_REMOVE:
-      return state;
+      return {
+        ...state,
+        favs:state.favs.filter(item=> item!==action.payload)
+      };
 
     case FETCH_SUCCESS:
-      return state;
+      return {
+        ...state,
+        current:action.payload,
+        loading:false
+      };
 
     case FETCH_LOADING:
-      return state;
+      return {
+        ...state,
+        loading:true
+      };
 
     case FETCH_ERROR:
-      return state;
+      return {
+        ...state,
+        error:action.payload
+      };
 
     case GET_FAVS_FROM_LS:
       return state;
