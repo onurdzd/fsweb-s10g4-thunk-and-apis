@@ -5,6 +5,7 @@ import {
   FETCH_LOADING,
   FETCH_ERROR,
   GET_FAVS_FROM_LS,
+  FAVORILERI_TEMIZLE
 } from "./actions";
 
 const initial = {
@@ -31,15 +32,16 @@ export function myReducer(state = initial, action) {
           favs:[...state.favs,action.payload]
         }
         writeFavsToLocalStorage(newState)
-      return newState }else{return state};
+      return newState }
+      else{return state};
 
     case FAV_REMOVE:
-        const newState={
+        const newState2={
           ...state,
           favs:state.favs.filter(item=> item!==action.payload)
         }
-        writeFavsToLocalStorage(newState)
-      return newState;
+        writeFavsToLocalStorage(newState2)
+      return newState2;
 
     case FETCH_SUCCESS:
       return {
@@ -65,6 +67,13 @@ export function myReducer(state = initial, action) {
         ...state,
         favs:readFavsFromLocalStorage()
       }
+     
+    case FAVORILERI_TEMIZLE:
+      const newState3={
+      ...initial
+      }
+      writeFavsToLocalStorage(newState3)
+      return newState3;  
 
       default:
       return state;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { removeFav} from "../actions";
-import { writeFavsToLocalStorage } from "../reducers";
+import { FAVORILERI_TEMIZLE, removeFav} from "../actions";
 import { useDispatch } from "react-redux";
 
 function FavItem() {
@@ -19,7 +18,11 @@ function FavItem() {
       >
         Çıkar
       </button>
+      
     </div>))}
+    <button className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white" onClick={()=>dispatch({type:FAVORILERI_TEMIZLE})} >
+             Favorileri Sil
+    </button>
     </>
   );
 }
