@@ -70,7 +70,8 @@ export function myReducer(state = initial, action) {
      
     case FAVORILERI_TEMIZLE:
       const newState3={
-      ...initial
+        ...state,
+        favs:[]
       }
       writeFavsToLocalStorage(newState3)
       return newState3;  
