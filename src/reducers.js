@@ -65,7 +65,7 @@ export function myReducer(state = initial, action) {
     case GET_FAVS_FROM_LS:
       return {
         ...state,
-        favs:readFavsFromLocalStorage()
+        favs:JSON.parse(localStorage.getItem("s10g4")) ? readFavsFromLocalStorage() : []
       }
      
     case FAVORILERI_TEMIZLE:
