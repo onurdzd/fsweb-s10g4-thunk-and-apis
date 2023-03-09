@@ -21,7 +21,9 @@ function FavItem() {
       
     </div>))}
     {favItems.length >1 &&
-    <button className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white" onClick={()=>dispatch({type:FAVORILERI_TEMIZLE})} >
+    <button className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white" onClick={()=>{
+      dispatch({type:FAVORILERI_TEMIZLE});
+      }} >
              Favorileri Sil
     </button>}
     </>

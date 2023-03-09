@@ -14,6 +14,7 @@ export default function App() {
   const favs = useSelector((store)=>store.favs);
   const notify = () => toast("Favorilere eklendi!");
 
+
   function addToFavs() {
     dispatch(addFav(current))
   }
@@ -57,7 +58,7 @@ export default function App() {
               onClick={()=>{addToFavs();
                 notify()
              }}
-              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+              className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white disabled:bg-slate-600"
               disabled={!current.activity}
             >
               Favorilere ekle

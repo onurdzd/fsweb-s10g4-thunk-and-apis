@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 function Item() {
 
   const current=useSelector((store)=> store.current)
-  console.log(current)
 
   return (
     <div className='shadow-md bg-green-200 text-center'>

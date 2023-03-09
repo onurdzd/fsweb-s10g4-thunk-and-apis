@@ -7,6 +7,8 @@ import {
   GET_FAVS_FROM_LS,
   FAVORILERI_TEMIZLE
 } from "./actions";
+import { toast } from "react-toastify";
+const notify2 = () => toast("Favorilerden silindi!");
 
 const initial = {
   favs: [],
@@ -20,7 +22,12 @@ function writeFavsToLocalStorage(state) {
 }
 
 function readFavsFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("s10g4"));
+ if(!JSON.parse(localStorage.getItem("s10g4"))) return []
+ return JSON.parse(localStorage.getItem("s10g4")) 
+}
+
+function LocalTemizle () {
+
 }
 
 export function myReducer(state = initial, action) {
@@ -40,6 +47,7 @@ export function myReducer(state = initial, action) {
           ...state,
           favs:state.favs.filter(item=> item!==action.payload)
         }
+        notify2();
         writeFavsToLocalStorage(newState2)
       return newState2;
 
@@ -65,7 +73,7 @@ export function myReducer(state = initial, action) {
     case GET_FAVS_FROM_LS:
       return {
         ...state,
-        favs:JSON.parse(localStorage.getItem("s10g4")) ? readFavsFromLocalStorage() : []
+        favs:readFavsFromLocalStorage()
       }
      
     case FAVORILERI_TEMIZLE:
